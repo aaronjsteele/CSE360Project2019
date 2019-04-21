@@ -13,6 +13,13 @@ public class Task {
 	private Date dueDate;
 	private Date statusDate;
 	private String status;
+	public Task() {
+		this.priority = 0;
+		this.description = "test";
+		this.dueDate = new Date();
+		this.statusDate = new Date();
+		this.status = "testStatus";
+	}
 	public Task(int priority, String description, Date dueDate, Date statusDate, String status) {
 		this.priority = priority;
 		this.description = description;

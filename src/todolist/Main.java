@@ -30,16 +30,30 @@ public class Main extends Application {
         buttonBox.getChildren().add(loadButton);        
         buttonBox.setSpacing(10);
         
-        ListView toDoItemList = new ListView();
+        ScrollPane scrollWindow = new ScrollPane();
+        VBox scrollVBox = new VBox();
+        scrollWindow.setContent(scrollVBox);
+        
+        for (int i = 1; i < 4; ++i) {
+        	Task newTask = new Task();
+        	ToDoItem newToDoItem = new ToDoItem(newTask);
+        	scrollVBox.getChildren().add(newToDoItem);
+        }
         
         root.setLeft(buttonBox);
-        root.setCenter(toDoItemList);
+        root.setCenter(scrollWindow);
         
         Scene scene = new Scene(root, 600, 300);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
+    
+    public static class ToDoItem extends HBox {
+    	public ToDoItem(Task inputTask) {
+    		getChildren().add(new Label(inputTask.getStatus()));
+    	}
+    }
+    
     public static void main(String[] args) {
         launch(args);
         
