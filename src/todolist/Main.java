@@ -54,6 +54,7 @@ public class Main extends Application {
         	newToDoItem.setPrefWidth(550);
         	newToDoItem.setMinWidth(550);
         	newToDoItem.setMaxWidth(550);
+        	newToDoItem.setPrefHeight(125);
         	scrollVBox.getChildren().add(newToDoItem);
         }
         
@@ -63,10 +64,13 @@ public class Main extends Application {
         AnchorPane.setLeftAnchor(scrollWindow, 0.0);
         AnchorPane.setRightAnchor(scrollWindow, 0.0);
         
+        VBox titleBox = new VBox();
+        Label titleLabel = new Label("To-Do Items");
+        
         root.setLeft(buttonBox);
         root.setCenter(anchorCenter);
         
-        Scene scene = new Scene(root, 710, 600);
+        Scene scene = new Scene(root, 710, 650);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -79,19 +83,22 @@ public class Main extends Application {
                     "-fx-border-width: 3;\n" +
                     "-fx-border-style: dashed;\n";
     		
+    		
     		Label priorityLabel = new Label("Priority #");
+    		Label descriptionLabel = new Label("Description: Sample");
+    		Label dueLabel = new Label("Due Date: 4/22/19");
+    		Label statusLabel = new Label("Status: Incomplete");
+    		Label completeLabel = new Label("Date Finished: 4/22/19");
+    		
     		HBox midHBox = new HBox();
     		
     		VBox leftTextBox = new VBox();
-    		Label label1 = new Label("test 1");
-    		Label label2 = new Label("test 2");
-    		leftTextBox.getChildren().addAll(label1, label2);
-    		leftTextBox.setPadding(new Insets(5,5,5,5));
+    		leftTextBox.getChildren().addAll(priorityLabel, descriptionLabel, dueLabel);
+    		leftTextBox.setPadding(new Insets(10,5,5,15));
     		
     		VBox rightTextBox = new VBox();
-    		rightTextBox.getChildren().add(new Label("test 3"));
-    		rightTextBox.getChildren().add(new Label("test 4"));
-    		rightTextBox.setPadding(new Insets(5,5,5,5));
+    		rightTextBox.getChildren().addAll(statusLabel, completeLabel);
+    		rightTextBox.setPadding(new Insets(10,15,5,5));
     		
     		Region midRegion = new Region();
     		
@@ -101,14 +108,12 @@ public class Main extends Application {
     		HBox bottomButtonBox = new HBox();
     		Button editButton = new Button("Edit");
     		Button deleteButton = new Button("Delete");
-    		editButton.setMinWidth(80.0);
+    		deleteButton.setPrefWidth(80.0);
     		editButton.setPrefWidth(80.0);
-    		editButton.setMaxWidth(80.0);
     		bottomButtonBox.getChildren().addAll(editButton, deleteButton);
     		bottomButtonBox.setSpacing(10);
-    		bottomButtonBox.setPadding(new Insets(10, 5, 10, 5));
-    		
-    		setTop(priorityLabel);
+    		bottomButtonBox.setPadding(new Insets(5, 10, 10, 15));
+
     		setCenter(midHBox);
     		setBottom(bottomButtonBox);
     		
