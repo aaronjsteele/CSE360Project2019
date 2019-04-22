@@ -27,8 +27,8 @@ public class EditDialog {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Edit");
-        window.setWidth(500);
-        window.setHeight(200);
+        window.setWidth(520);
+        window.setHeight(230);
         window.initStyle(StageStyle.UTILITY);
         window.setResizable(false);
 
@@ -36,8 +36,8 @@ public class EditDialog {
         
         HBox descriptionHBox = new HBox();
         Label descriptionLabel = new Label("Description");
-        descriptionLabel.setMinWidth(65);
-        descriptionLabel.setMaxWidth(65);
+        descriptionLabel.setMinWidth(85);
+        descriptionLabel.setMaxWidth(85);
         // Adding the description text field
         TextField descriptionField = new TextField();
         descriptionField.setPromptText("Enter a description");
@@ -53,11 +53,11 @@ public class EditDialog {
         HBox buttonHBox = new HBox();
         
         Label priorityLabel = new Label("Priority");
-        priorityLabel.setMinWidth(65);
-        priorityLabel.setMaxWidth(65);
+        priorityLabel.setMinWidth(85);
+        priorityLabel.setMaxWidth(85);
         Label dueLabel = new Label("Due Date");
-        dueLabel.setMinWidth(65);
-        dueLabel.setMaxWidth(65);
+        dueLabel.setMinWidth(85);
+        dueLabel.setMaxWidth(85);
         Label statusLabel = new Label("Status");
         statusLabel.setMinWidth(67);
         statusLabel.setMaxWidth(67);
@@ -121,7 +121,7 @@ public class EditDialog {
         
         root.getChildren().addAll(descriptionHBox, middleHBox, buttonHBox);
         
-        window.setScene(new Scene(root, 500, 180));
+        window.setScene(new Scene(root, 520, 200));
         return window;
     }
 } 
