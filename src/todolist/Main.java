@@ -125,7 +125,7 @@ public class Main extends Application {
 
         EventHandler rightHandler = Handler.rightHandler(scrollVBox, pageLabel, pageNum, taskList);
         rightArrow.setOnAction(rightHandler);
-        Stage addDialog = AddEditDialog.createAddDialog(scrollVBox,sortComboBox,pageLabel, pageNum, taskList);
+        Stage addDialog = AddDialog.createAddDialog(scrollVBox,sortComboBox,pageLabel, pageNum, taskList);
 
         EventHandler addHandler = Handler.addHandler(addDialog);
         addButton.setOnAction(addHandler);

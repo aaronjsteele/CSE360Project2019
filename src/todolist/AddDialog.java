@@ -82,12 +82,6 @@ public class AddDialog {
         	FXCollections.observableArrayList(
         		"Incomplete",
     			"In Progress",
-<<<<<<< HEAD:src/todolist/AddEditDialog.java
-    			"Complete"
-        	);
-        final ComboBox progressComboBox = new ComboBox(progressOptions);
-=======
-    			"Incomplete",
     			"Completed"
         	);
         final ComboBox progressComboBox = new ComboBox(progressOptions);
@@ -95,7 +89,6 @@ public class AddDialog {
         HBox.setHgrow(progressComboBox, Priority.ALWAYS);
         
         // Creates the HBoxes containing labels and text fields
->>>>>>> eb36830f0a97313ca7b8cb7385964a459bc28b61:src/todolist/AddDialog.java
         HBox priorityHBox = new HBox();
         priorityHBox.getChildren().addAll(priorityLabel, priorityField);
         priorityHBox.setPadding(new Insets(5, 10, 5, 10));
@@ -128,8 +121,7 @@ public class AddDialog {
         
         middleHBox.getChildren().addAll(leftVBox, rightVBox);
         
-<<<<<<< HEAD:src/todolist/AddEditDialog.java
-        root.getChildren().addAll(descriptionHBox, middleHBox);
+        root.getChildren().addAll(descriptionHBox, middleHBox, buttonHBox);
         // Set up the JavaFX button controls and listeners and the text fields
         // for the login info. The button listeners set the login values
 
@@ -137,10 +129,7 @@ public class AddDialog {
         Object[] inputs = {priorityField, dueField, progressComboBox, dateField, descriptionField};
         EventHandler addHandler = Handler.addDialogHandler(scrollVBox, sortComboBox, pageLabel, pageNum, taskList, inputs);
         addButton.setOnAction(addHandler);
-=======
-        root.getChildren().addAll(descriptionHBox, middleHBox, buttonHBox);
->>>>>>> eb36830f0a97313ca7b8cb7385964a459bc28b61:src/todolist/AddDialog.java
-        
+
         window.setScene(new Scene(root, 500, 180));
         return window;
     }
