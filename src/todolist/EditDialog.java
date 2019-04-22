@@ -77,7 +77,7 @@ public class EditDialog {
         cancelButton.setMaxWidth(100);
         
         TextField priorityField = new TextField(""+task.getPriority());
-        priorityField.setPromptText("Enter a priority number");
+        priorityField.setPromptText("Enter a priority #");
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         String dueDateString = dateFormat.format(task.getDueDate());
         TextField dueField = new TextField(dueDateString);

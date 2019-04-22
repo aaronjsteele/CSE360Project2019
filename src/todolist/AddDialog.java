@@ -78,7 +78,7 @@ public class AddDialog {
         cancelButton.setMaxWidth(100);
         
         TextField priorityField = new TextField();
-        priorityField.setPromptText("Enter a priority number");
+        priorityField.setPromptText("Enter a priority #");
         TextField dueField = new TextField();
         dueField.setPromptText("MM/DD/YYYY");
         TextField dateField = new TextField();
