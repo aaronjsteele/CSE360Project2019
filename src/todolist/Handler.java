@@ -77,8 +77,39 @@ public class Handler {
 					}
 					int taskSize = taskList.size();
 					String output = "Showing ";
-					output += (4 * currentPage) + 1;
-					output += "4 of ";
+					output += ((4 * currentPage) + 1);
+					output += ((4 * currentPage) + 4) +" of ";
+					output += taskSize;
+					pageLabel.setText(output);
+				}
+			}
+			
+		};
+		return eventHandler;
+	}
+	public static EventHandler rightHandler(VBox scrollVBox, Label pageLabel, IntHolder pageNum, ArrayList<Task> taskList) {
+		EventHandler eventHandler = new EventHandler() {
+			@Override
+			public void handle(Event event) {
+				// TODO Auto-generated method stub
+				int currentPage = pageNum.getNumber();
+				if((currentPage + 1) * 4 < taskList.size()) {
+					pageNum.setNumber(currentPage + 1);
+					currentPage++;
+					scrollVBox.getChildren().clear();
+					for(int index = 0; index < 4 && index < taskList.size() - currentPage * 4; index++) {
+						Task newTask = taskList.get(index + (4 * currentPage));
+						ToDoItem newToDoItem = new ToDoItem(newTask);
+						scrollVBox.getChildren().add(newToDoItem);
+					}
+					int taskSize = taskList.size();
+					String output = "Showing ";
+					output += ((4 * currentPage) + 1) + "-";
+					if(taskSize - (4*(currentPage+1)) >= 0) {
+						output += ((4 * currentPage) + 4) +" of ";
+					}else {
+						output += taskSize + " of ";
+					}
 					output += taskSize;
 					pageLabel.setText(output);
 				}
