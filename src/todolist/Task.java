@@ -65,7 +65,7 @@ public class Task {
 		taskString += "Priority:\t\t" + priority + "\n";
 		taskString += "Description:\t"  + description + "\n";
 		taskString += "Due Date:\t\t" + dueDateString + "\n";
-		if(status.equals("Complete")) {
+		if(status.equals("Completed")) {
 			statusDateString = dateFormat.format(statusDate);
 			taskString += "Date Finished:\t" + statusDateString + "\n";
 		}else if(status.equals("In Progress")) {

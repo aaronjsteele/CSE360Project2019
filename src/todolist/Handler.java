@@ -434,4 +434,19 @@ public class Handler {
 		};
 		return eventHandler;
 	}
+	public static EventHandler resetHandler() {
+		EventHandler eventHandler = new EventHandler() {
+
+			@Override
+			public void handle(Event event) {
+				// TODO Auto-generated method stub
+				Main.scrollVBox.getChildren().clear();
+				Main.pageNum.setNumber(0);
+				Main.pageLabel.setText("Showing 0-0 of 0");
+				Main.taskList.clear();
+			}
+			
+		};
+		return eventHandler;
+	}
 }
