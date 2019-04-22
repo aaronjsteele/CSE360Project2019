@@ -34,7 +34,7 @@ public class EditDialog {
         window.setHeight(230);
         window.initStyle(StageStyle.UTILITY);
         window.setResizable(false);
-        // hi
+        // hi there
         VBox root = new VBox();
         
         HBox descriptionHBox = new HBox();
