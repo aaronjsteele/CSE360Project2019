@@ -29,6 +29,7 @@ public class Main extends Application {
         String blackBorderStyle = "-fx-border-color: black";
         
         ArrayList<Task> taskList = new ArrayList<Task>();
+        IntHolder pageNum = new IntHolder(0);
         
         Button addButton = new Button("Add");
         Button printButton = new Button("Print");
@@ -57,8 +58,7 @@ public class Main extends Application {
         
         scrollWindow.setPrefWidth(550);
         scrollVBox.setFillWidth(true);
-        EventHandler loadHandler = Handler.loadHandler(scrollVBox, taskList);
-        loadButton.setOnAction(loadHandler);
+        
         for (int i = 1; i < 5; ++i) {
         	Task newTask = new Task();
         	ToDoItem newToDoItem = new ToDoItem(newTask);
@@ -126,6 +126,13 @@ public class Main extends Application {
         root.setBottom(bottomSortBox);
         
         scrollVBox.setStyle(blackBorderStyle);
+        
+        //event handler section
+        EventHandler loadHandler = Handler.loadHandler(scrollVBox, pageLabel, pageNum, taskList);
+        loadButton.setOnAction(loadHandler);
+        EventHandler leftHandler = Handler.leftHandler(scrollVBox, pageLabel, pageNum, taskList);
+        leftArrow.setOnAction(leftHandler);
+        
         
         BorderPane.setAlignment(scrollVBox, Pos.TOP_CENTER);
         BorderPane.setAlignment(bottomSortBox, Pos.TOP_CENTER);
