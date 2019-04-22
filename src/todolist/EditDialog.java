@@ -68,9 +68,11 @@ public class EditDialog {
         dateLabel.setMinWidth(100);
         dateLabel.setMaxWidth(100);
         Button addButton = new Button("Edit");
+        addButton.setStyle("-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );");
         addButton.setMinWidth(100);
         addButton.setMaxWidth(100);
         Button cancelButton = new Button("Cancel");
+        cancelButton.setStyle("-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );");
         cancelButton.setMinWidth(100);
         cancelButton.setMaxWidth(100);
         
