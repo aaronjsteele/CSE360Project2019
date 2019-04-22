@@ -299,6 +299,40 @@ public class Handler {
 		};
 		return eventHandler;
 	}
+	public static EventHandler deleteHandler(Task task) {
+		EventHandler eventHandler = new EventHandler() {
+			@Override
+			public void handle(Event event) {
+				// TODO Auto-generated method stub
+				Main.pageNum.setNumber(0);
+				Main.scrollVBox.getChildren().clear();
+				Task.deleteTask(task, Main.taskList);
+				String sortBy = (String)Main.sortComboBox.getValue();
+				Task.sort(Main.taskList, sortBy);
+				for(int index = 0; index < Main.taskList.size() && index < 4; index++) {
+					Task newTask = Main.taskList.get(index);
+					ToDoItem newToDoItem = new ToDoItem(newTask);
+					Main.scrollVBox.getChildren().add(newToDoItem);
+				}
+				int taskSize = Main.taskList.size();
+				String output = "Showing ";
+				if(taskSize > 0) {
+					output += "1-";
+				}else {
+					output += "0-";
+				}
+				if(taskSize >= 4) {
+					output += "4 of ";
+				}else {
+					output += taskSize + " of ";
+				}
+				output += taskSize;
+				Main.pageLabel.setText(output);
+			}
+			
+		};
+		return eventHandler;
+	}
 	public static EventHandler statusHandler(HBox dateHBox, ComboBox progressComboBox, Label dateLabel) {
 		EventHandler eventHandler = new EventHandler() {
 			@Override
