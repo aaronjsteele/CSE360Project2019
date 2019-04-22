@@ -20,7 +20,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 public class Main extends Application {
-
+	public static VBox scrollVBox;
+	public static ComboBox sortComboBox;
+	public static Label pageLabel;
+	public static IntHolder pageNum;
+	public static ArrayList<Task> taskList;
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("/todolist/todolist.fxml"));
@@ -28,8 +32,8 @@ public class Main extends Application {
         
         String blackBorderStyle = "-fx-border-color: black";
         
-        ArrayList<Task> taskList = new ArrayList<Task>();
-        IntHolder pageNum = new IntHolder(0);
+        taskList = new ArrayList<Task>();
+        pageNum = new IntHolder(0);
         
         Button addButton = new Button("Add");
         Button printButton = new Button("Print");
@@ -50,7 +54,7 @@ public class Main extends Application {
         buttonBox.setMinHeight(500);
         buttonBox.setMaxHeight(500);
         
-        VBox scrollVBox = new VBox();
+        scrollVBox = new VBox();
         scrollVBox.setFillWidth(true);
 
         scrollVBox.setMinHeight(500);
@@ -67,7 +71,6 @@ public class Main extends Application {
         titleBox.setPrefHeight(50);
         titleBox.setMinHeight(50);
         titleBox.setMaxHeight(50);
-        
         titleBox.setAlignment(Pos.CENTER_LEFT);
         
 
@@ -85,14 +88,14 @@ public class Main extends Application {
     			"Description",
     			"Due Date"
         	);
-        final ComboBox sortComboBox = new ComboBox(sortOptions);
+        sortComboBox = new ComboBox(sortOptions);
         sortComboBox.getSelectionModel().selectFirst();
         Region midSpaceRegion = new Region();
         Region leftSpaceRegion = new Region();
         Region rightSpaceRegion = new Region();
         Button leftArrow = new Button("<");
         Button rightArrow = new Button(">");
-        Label pageLabel = new Label("Showing 1-4 of 13");
+        pageLabel = new Label("Showing 1-4 of 13");
         
         leftSpaceRegion.setMinWidth(150);
         leftSpaceRegion.setMaxWidth(150);
@@ -122,11 +125,9 @@ public class Main extends Application {
         loadButton.setOnAction(loadHandler);
         EventHandler leftHandler = Handler.leftHandler(scrollVBox, pageLabel, pageNum, taskList);
         leftArrow.setOnAction(leftHandler);
-
         EventHandler rightHandler = Handler.rightHandler(scrollVBox, pageLabel, pageNum, taskList);
         rightArrow.setOnAction(rightHandler);
         Stage addDialog = AddDialog.createAddDialog(scrollVBox,sortComboBox,pageLabel, pageNum, taskList);
-
         EventHandler addHandler = Handler.addHandler(addDialog);
         addButton.setOnAction(addHandler);
         EventHandler sortHandler = Handler.sortHandler(scrollVBox, sortComboBox, pageLabel, pageNum, taskList);

@@ -1,8 +1,11 @@
 package todolist;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -23,7 +26,7 @@ import javafx.stage.StageStyle;
 public class EditDialog {
     private static List<String> toDoItemInfo;
 
-    public static Stage createEditDialog() {
+    public static Stage createEditDialog(Task task) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Edit");
@@ -39,7 +42,7 @@ public class EditDialog {
         descriptionLabel.setMinWidth(65);
         descriptionLabel.setMaxWidth(65);
         // Adding the description text field
-        TextField descriptionField = new TextField();
+        TextField descriptionField = new TextField(task.getDescription());
         descriptionField.setPromptText("Enter a description");
         descriptionField.setPrefWidth(395);
         descriptionHBox.getChildren().addAll(descriptionLabel, descriptionField);
@@ -69,11 +72,19 @@ public class EditDialog {
         cancelButton.setMinWidth(100);
         cancelButton.setMaxWidth(100);
         
-        TextField priorityField = new TextField();
+        TextField priorityField = new TextField(""+task.getPriority());
         priorityField.setPromptText("Enter a priority number");
-        TextField dueField = new TextField();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        String dueDateString = dateFormat.format(task.getDueDate());
+        TextField dueField = new TextField(dueDateString);
         dueField.setPromptText("MM/DD/YYYY");
-        TextField dateField = new TextField();
+        TextField dateField;
+        if(!task.getStatus().equals("Incomplete")) {
+        	String statusDateString = dateFormat.format(task.getStatusDate());
+        	dateField = new TextField(statusDateString);
+        }else {
+        	dateField = new TextField();
+        }
         dateField.setPromptText("MM/DD/YYYY");
         
         ObservableList<String> progressOptions =
@@ -83,7 +94,7 @@ public class EditDialog {
     			"Completed"
         	);
         final ComboBox progressComboBox = new ComboBox(progressOptions);
-        progressComboBox.getSelectionModel().selectFirst();
+        progressComboBox.getSelectionModel().select(task.getStatus());
         HBox.setHgrow(progressComboBox, Priority.ALWAYS);
         
         // Creates the HBoxes containing labels and text fields
@@ -102,12 +113,15 @@ public class EditDialog {
         statusHBox.setPadding(new Insets(5, 10, 5, 10));
         statusHBox.setSpacing(10);
         statusHBox.setAlignment(Pos.CENTER_LEFT);
+        
         HBox dateHBox = new HBox();
         dateHBox.getChildren().addAll(dateLabel, dateField);
         dateHBox.setPadding(new Insets(5, 10, 5, 10));
         dateHBox.setSpacing(10);
         dateHBox.setAlignment(Pos.CENTER_LEFT);
-        
+        if(task.getStatus().equals("Incomplete")) {
+        	dateHBox.setVisible(false);
+        }
         // Adds the elements to the left and right VBoxes
         leftVBox.getChildren().addAll(priorityHBox, dueHBox);
         rightVBox.getChildren().addAll(statusHBox, dateHBox);
@@ -121,6 +135,13 @@ public class EditDialog {
         
         root.getChildren().addAll(descriptionHBox, middleHBox, buttonHBox);
         
+        Object[] inputs = {priorityField, dueField, progressComboBox, dateField, descriptionField};
+        EventHandler editDialogHandler = Handler.editDialogHandler(Main.scrollVBox, Main.sortComboBox, Main.pageLabel, Main.pageNum, Main.taskList, task, inputs, window);
+        addButton.setOnAction(editDialogHandler);
+        EventHandler statusHandler = Handler.statusHandler(dateHBox, progressComboBox);
+        progressComboBox.setOnAction(statusHandler);
+        EventHandler cancelHandler = Handler.cancelHandler(window);
+        cancelButton.setOnAction(cancelHandler);
         window.setScene(new Scene(root, 500, 180));
         return window;
     }

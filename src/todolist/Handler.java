@@ -171,7 +171,7 @@ public class Handler {
 		};
 		return eventHandler;
 	}
-	public static EventHandler addDialogHandler(VBox scrollVBox, ComboBox sortComboBox,Label pageLabel, IntHolder pageNum, ArrayList<Task> taskList, Object[] inputs) {
+	public static EventHandler addDialogHandler(VBox scrollVBox, ComboBox sortComboBox,Label pageLabel, IntHolder pageNum, ArrayList<Task> taskList, Object[] inputs, Stage stage) {
 		EventHandler eventHandler = new EventHandler() {
 
 			@Override
@@ -218,6 +218,7 @@ public class Handler {
 					}
 					output += taskSize;
 					pageLabel.setText(output);
+					stage.close();
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -228,5 +229,101 @@ public class Handler {
 		};
 		return eventHandler;
 	}
-	
+	public static EventHandler editHandler(Stage stage) {
+		EventHandler eventHandler = new EventHandler() {
+
+			@Override
+			public void handle(Event event) {
+				// TODO Auto-generated method stub
+				stage.showAndWait();
+			}
+			
+		};
+		return eventHandler;
+	}
+	public static EventHandler editDialogHandler(VBox scrollVBox, ComboBox sortComboBox,Label pageLabel, IntHolder pageNum, ArrayList<Task> taskList, Task task, Object[] inputs, Stage stage) {
+		EventHandler eventHandler = new EventHandler() {
+
+			@Override
+			public void handle(Event event) {
+				// TODO Auto-generated method stub
+				TextField priorityField = (TextField)inputs[0];
+				TextField dueField = (TextField)inputs[1];
+				ComboBox progressComboBox = (ComboBox)inputs[2];
+				TextField dateField = (TextField)inputs[3];
+				TextField descriptionField = (TextField)inputs[4];
+				pageNum.setNumber(0);
+				scrollVBox.getChildren().clear();
+				SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+				String dueDateString = dueField.getText();
+				String statusDateString = dateField.getText();
+				String status = (String)progressComboBox.getValue();
+				String description = descriptionField.getText();
+				try {
+					int priority = Integer.parseInt(priorityField.getText());
+					Date dueDate = dateFormat.parse(dueDateString);
+					Date statusDate = null;
+					if(status != "Incomplete") {
+						statusDate = dateFormat.parse(statusDateString);
+					}
+					Task.editTask(task, Main.taskList, priority, description, dueDate, statusDate, status);
+					String sortBy = (String)sortComboBox.getValue();
+					Task.sort(taskList, sortBy);
+					for(int index = 0; index < taskList.size() && index < 4; index++) {
+						Task newTask = taskList.get(index);
+						ToDoItem newToDoItem = new ToDoItem(newTask);
+						scrollVBox.getChildren().add(newToDoItem);
+					}
+					int taskSize = taskList.size();
+					String output = "Showing ";
+					if(taskSize > 0) {
+						output += "1-";
+					}else {
+						output += "0-";
+					}
+					if(taskSize >= 4) {
+						output += "4 of ";
+					}else {
+						output += taskSize + " of ";
+					}
+					output += taskSize;
+					pageLabel.setText(output);
+					stage.close();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("Something went horribly wrong");
+				}
+			}
+			
+		};
+		return eventHandler;
+	}
+	public static EventHandler statusHandler(HBox dateHBox, ComboBox progressComboBox) {
+		EventHandler eventHandler = new EventHandler() {
+			@Override
+			public void handle(Event event) {
+				// TODO Auto-generated method stub
+				String status = (String)progressComboBox.getValue();
+				if(status.equals("Incomplete")) {
+					dateHBox.setVisible(false);
+				}else {
+					dateHBox.setVisible(true);
+				}
+			}
+			
+		};
+		return eventHandler;
+	}
+	public static EventHandler cancelHandler(Stage stage) {
+		EventHandler eventHandler = new EventHandler() {
+			@Override
+			public void handle(Event event) {
+				// TODO Auto-generated method stub
+				stage.close();
+			}
+			
+		};
+		return eventHandler;
+	}
 }
