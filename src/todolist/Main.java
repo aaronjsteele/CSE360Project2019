@@ -60,6 +60,7 @@ public class Main extends Application {
 
         HBox titleBox = new HBox();
         Label titleLabel = new Label("To-Do Items");
+        titleLabel.setStyle("-fx-font-size: 20pt");
         Region leftTitleRegion = new Region();
         leftTitleRegion.setMinWidth(160);
         leftTitleRegion.setMaxWidth(160);
