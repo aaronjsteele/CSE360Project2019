@@ -2,9 +2,13 @@ package todolist;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -23,6 +27,8 @@ public class Main extends Application {
         primaryStage.setTitle("To-Do List Unlimited 2019");
         
         String blackBorderStyle = "-fx-border-color: black";
+        
+        ArrayList<Task> taskList = new ArrayList<Task>();
         
         Button addButton = new Button("Add");
         Button printButton = new Button("Print");
@@ -43,11 +49,18 @@ public class Main extends Application {
         buttonBox.setMinHeight(500);
         buttonBox.setMaxHeight(500);
         
+        
+        AnchorPane anchorCenter = new AnchorPane();
+        
+        ScrollPane scrollWindow = new ScrollPane();
         VBox scrollVBox = new VBox();
-        scrollVBox.setPrefWidth(550);
-        scrollVBox.setPrefHeight(500);
-        scrollVBox.setMaxHeight(500);
-                
+       
+        scrollWindow.setContent(scrollVBox);
+        
+        scrollWindow.setPrefWidth(550);
+        scrollVBox.setFillWidth(true);
+        EventHandler loadHandler = Handler.loadHandler(scrollVBox, taskList);
+        loadButton.setOnAction(loadHandler);
         for (int i = 1; i < 5; ++i) {
         	Task newTask = new Task();
         	ToDoItem newToDoItem = new ToDoItem(newTask);
@@ -59,6 +72,7 @@ public class Main extends Application {
         	scrollVBox.getChildren().add(newToDoItem);
         }
         
+
         HBox titleBox = new HBox();
         Label titleLabel = new Label("To-Do Items");
         Region leftTitleRegion = new Region();
@@ -73,6 +87,7 @@ public class Main extends Application {
         
         titleBox.setAlignment(Pos.CENTER_LEFT);
         
+
         // Creates the bottom portion of the main UI
         HBox bottomSortBox = new HBox();
         bottomSortBox.setPrefHeight(50);
@@ -120,7 +135,7 @@ public class Main extends Application {
         BorderPane.setAlignment(scrollVBox, Pos.TOP_CENTER);
         BorderPane.setAlignment(bottomSortBox, Pos.TOP_CENTER);
         
-        Scene scene = new Scene(root, 710, 600);
+        Scene scene = new Scene(root, 710, 650);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
