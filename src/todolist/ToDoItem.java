@@ -49,8 +49,12 @@ public class ToDoItem  extends BorderPane{
 
 		setCenter(midHBox);
 		setBottom(bottomButtonBox);
-		
-		setPrefHeight(50);
+
 		setStyle(toDoItemCssLayout);
+		
+		setMinWidth(550);
+    	setMaxWidth(550);
+    	setMinHeight(125);
+    	setMaxHeight(125);
 	}
 }

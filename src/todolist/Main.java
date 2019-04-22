@@ -49,29 +49,13 @@ public class Main extends Application {
         buttonBox.setMinHeight(500);
         buttonBox.setMaxHeight(500);
         
-        
-        AnchorPane anchorCenter = new AnchorPane();
-        
-        ScrollPane scrollWindow = new ScrollPane();
         VBox scrollVBox = new VBox();
-       
-        scrollWindow.setContent(scrollVBox);
-        
-        scrollWindow.setPrefWidth(550);
         scrollVBox.setFillWidth(true);
+        scrollVBox.setMinHeight(500);
+        scrollVBox.setMaxHeight(500);
+        
         EventHandler loadHandler = Handler.loadHandler(scrollVBox, taskList);
         loadButton.setOnAction(loadHandler);
-        for (int i = 1; i < 5; ++i) {
-        	Task newTask = new Task();
-        	ToDoItem newToDoItem = new ToDoItem(newTask);
-        	newToDoItem.setPrefWidth(550);
-        	newToDoItem.setMinWidth(550);
-        	newToDoItem.setMaxWidth(550);
-        	newToDoItem.setMinHeight(125);
-        	newToDoItem.setMaxHeight(125);
-        	scrollVBox.getChildren().add(newToDoItem);
-        }
-        
 
         HBox titleBox = new HBox();
         Label titleLabel = new Label("To-Do Items");
@@ -81,18 +65,18 @@ public class Main extends Application {
         
         Region rightTitleRegion = new Region();
         titleBox.getChildren().addAll(leftTitleRegion, titleLabel, rightTitleRegion);
-        titleBox.setPrefHeight(25);
-        titleBox.setMinHeight(25);
-        titleBox.setMaxHeight(25);
+        titleBox.setPrefHeight(50);
+        titleBox.setMinHeight(50);
+        titleBox.setMaxHeight(50);
         
         titleBox.setAlignment(Pos.CENTER_LEFT);
         
 
         // Creates the bottom portion of the main UI
         HBox bottomSortBox = new HBox();
-        bottomSortBox.setPrefHeight(50);
-        bottomSortBox.setMaxHeight(50);
-        bottomSortBox.setMinHeight(50);
+        bottomSortBox.setPrefHeight(40);
+        bottomSortBox.setMaxHeight(40);
+        bottomSortBox.setMinHeight(40);
         
         Label sortLabel = new Label("Sort By:");
 
@@ -128,6 +112,7 @@ public class Main extends Application {
         root.setCenter(scrollVBox);
         root.setBottom(bottomSortBox);
         
+        titleBox.setStyle(blackBorderStyle);
         bottomSortBox.setStyle(blackBorderStyle);
         scrollVBox.setStyle(blackBorderStyle);
         buttonBox.setStyle(blackBorderStyle);
@@ -135,56 +120,10 @@ public class Main extends Application {
         BorderPane.setAlignment(scrollVBox, Pos.TOP_CENTER);
         BorderPane.setAlignment(bottomSortBox, Pos.TOP_CENTER);
         
-        Scene scene = new Scene(root, 710, 650);
+        Scene scene = new Scene(root, 700, 580);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
-    }
-    
-    public static class ToDoItem extends BorderPane {
-    	public ToDoItem(Task inputTask) {
-    		String toDoItemCssLayout = "-fx-border-color: red;\n" +
-                    "-fx-border-insets: 5;\n" +
-                    "-fx-border-width: 3;\n" +
-                    "-fx-border-style: dashed;\n";
-    		
-    		
-    		Label priorityLabel = new Label("Priority #");
-    		Label descriptionLabel = new Label("Description: Sample");
-    		Label dueLabel = new Label("Due Date: 4/22/19");
-    		Label statusLabel = new Label("Status: Incomplete");
-    		Label completeLabel = new Label("Date Finished: 4/22/19");
-    		
-    		HBox midHBox = new HBox();
-    		
-    		VBox leftTextBox = new VBox();
-    		leftTextBox.getChildren().addAll(priorityLabel, descriptionLabel, dueLabel);
-    		leftTextBox.setPadding(new Insets(10,5,5,15));
-    		
-    		VBox rightTextBox = new VBox();
-    		rightTextBox.getChildren().addAll(statusLabel, completeLabel);
-    		rightTextBox.setPadding(new Insets(10,15,5,5));
-    		
-    		Region midRegion = new Region();
-    		
-    		midHBox.getChildren().addAll(leftTextBox, midRegion, rightTextBox);
-    		HBox.setHgrow(midRegion, Priority.ALWAYS);
-    		
-    		HBox bottomButtonBox = new HBox();
-    		Button editButton = new Button("Edit");
-    		Button deleteButton = new Button("Delete");
-    		deleteButton.setPrefWidth(80.0);
-    		editButton.setPrefWidth(80.0);
-    		bottomButtonBox.getChildren().addAll(editButton, deleteButton);
-    		bottomButtonBox.setSpacing(10);
-    		bottomButtonBox.setPadding(new Insets(5, 10, 10, 15));
-
-    		setCenter(midHBox);
-    		setBottom(bottomButtonBox);
-    		
-    		setPrefHeight(50);
-    		setStyle(toDoItemCssLayout);
-    	}
     }
     
     public static void main(String[] args) {

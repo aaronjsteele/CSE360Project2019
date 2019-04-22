@@ -3,9 +3,7 @@ package todolist;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-
 import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,11 +15,12 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import todolist.Main.ToDoItem;
+import todolist.ToDoItem;
 import javafx.scene.paint.Color;
 import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+
 public class Handler {
 	public Handler() {
 		
