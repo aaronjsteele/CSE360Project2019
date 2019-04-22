@@ -132,8 +132,8 @@ public class Main extends Application {
         leftArrow.setOnAction(leftHandler);
         EventHandler rightHandler = Handler.rightHandler(scrollVBox, pageLabel, pageNum, taskList);
         rightArrow.setOnAction(rightHandler);
-        Stage addDialog = AddDialog.createAddDialog(scrollVBox,sortComboBox,pageLabel, pageNum, taskList);
-        EventHandler addHandler = Handler.addHandler(addDialog);
+        //Stage addDialog = AddDialog.createAddDialog(scrollVBox,sortComboBox,pageLabel, pageNum, taskList);
+        EventHandler addHandler = Handler.addHandler();
         addButton.setOnAction(addHandler);
         EventHandler sortHandler = Handler.sortHandler(scrollVBox, sortComboBox, pageLabel, pageNum, taskList);
         sortComboBox.setOnAction(sortHandler);

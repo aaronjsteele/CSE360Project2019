@@ -27,7 +27,7 @@ import javafx.stage.StageStyle;
 public class AddDialog {
     private static List<String> toDoItemInfo;
 
-    public static Stage createAddDialog(VBox scrollVBox, ComboBox sortComboBox, Label pageLabel, IntHolder pageNum, ArrayList<Task> taskList) {
+    public static Stage createAddDialog() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Add");
@@ -135,7 +135,7 @@ public class AddDialog {
         Object[] inputs = {priorityField, dueField, progressComboBox, dateField, descriptionField};
         EventHandler statusHandler = Handler.statusHandler(dateHBox, progressComboBox, dateLabel);
         progressComboBox.setOnAction(statusHandler);
-        EventHandler addHandler = Handler.addDialogHandler(scrollVBox, sortComboBox, pageLabel, pageNum, taskList, inputs, window);
+        EventHandler addHandler = Handler.addDialogHandler(Main.scrollVBox, Main.sortComboBox, Main.pageLabel, Main.pageNum, Main.taskList, inputs, window);
         addButton.setOnAction(addHandler);
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
