@@ -63,6 +63,8 @@ public class ToDoItem  extends BorderPane{
 		EventHandler editHandler = Handler.editHandler(editStage);
 		editButton.setOnAction(editHandler);
 		Button deleteButton = new Button("Delete");
+		EventHandler deleteHandler = Handler.deleteHandler(inputTask);
+		deleteButton.setOnAction(deleteHandler);
 		deleteButton.setPrefWidth(80.0);
 		editButton.setPrefWidth(80.0);
 		bottomButtonBox.getChildren().addAll(editButton, deleteButton);
