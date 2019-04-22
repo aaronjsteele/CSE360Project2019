@@ -2,9 +2,7 @@ package todolist;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-
 import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -132,6 +130,10 @@ public class Main extends Application {
         addButton.setOnAction(addHandler);
         EventHandler sortHandler = Handler.sortHandler(scrollVBox, sortComboBox, pageLabel, pageNum, taskList);
         sortComboBox.setOnAction(sortHandler);
+        EventHandler printHandler = Handler.printHandler(taskList);
+        printButton.setOnAction(printHandler);
+        EventHandler saveHandler = Handler.saveHandler(taskList);
+        saveButton.setOnAction(saveHandler);
         BorderPane.setAlignment(scrollVBox, Pos.TOP_CENTER);
         BorderPane.setAlignment(bottomSortBox, Pos.TOP_CENTER);
         sortComboBox.getSelectionModel().selectFirst();
@@ -139,7 +141,6 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
-        
     }
     
     public static void main(String[] args) {

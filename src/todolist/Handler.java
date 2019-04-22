@@ -322,7 +322,27 @@ public class Handler {
 				// TODO Auto-generated method stub
 				stage.close();
 			}
+		};
+		return eventHandler;
+	}
+
+	public static EventHandler printHandler(ArrayList<Task> taskList) {
+		EventHandler eventHandler = new EventHandler() {
 			
+			@Override
+			public void handle(Event event) {
+				Task.savePrintFile(taskList);
+			}
+		};
+		return eventHandler;
+	}
+	public static EventHandler saveHandler(ArrayList<Task> taskList) {
+		EventHandler eventHandler = new EventHandler() {
+			
+			@Override
+			public void handle(Event event) {
+				Task.saveFile(taskList);
+			}
 		};
 		return eventHandler;
 	}
