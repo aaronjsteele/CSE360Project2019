@@ -56,8 +56,19 @@ public class Main extends Application {
         	scrollVBox.getChildren().add(newToDoItem);
         }
         
-        VBox titleBox = new VBox();
+        HBox titleBox = new HBox();
         Label titleLabel = new Label("To-Do Items");
+        Region leftTitleRegion = new Region();
+        leftTitleRegion.setMinWidth(160);
+        leftTitleRegion.setMaxWidth(160);
+        
+        Region rightTitleRegion = new Region();
+        titleBox.getChildren().addAll(leftTitleRegion, titleLabel, rightTitleRegion);
+        titleBox.setPrefHeight(25);
+        titleBox.setMinHeight(25);
+        titleBox.setMaxHeight(25);
+        
+        titleBox.setAlignment(Pos.CENTER_LEFT);
         
         // Creates the bottom portion of the main UI
         HBox bottomSortBox = new HBox();
@@ -75,18 +86,34 @@ public class Main extends Application {
         	);
         final ComboBox sortComboBox = new ComboBox(sortOptions);
         Region midSpaceRegion = new Region();
+        Region leftSpaceRegion = new Region();
+        Region rightSpaceRegion = new Region();
         Button leftArrow = new Button("<");
         Button rightArrow = new Button(">");
         Label pageLabel = new Label("Showing 1-4 of 13");
         
-        bottomSortBox.getChildren().addAll(sortLabel, sortComboBox,
-        		midSpaceRegion, leftArrow, pageLabel, rightArrow);
+        leftSpaceRegion.setMinWidth(150);
+        leftSpaceRegion.setMaxWidth(150);
         
+        rightSpaceRegion.setMinWidth(20);
+        rightSpaceRegion.setMaxWidth(20);
+        
+        bottomSortBox.getChildren().addAll(leftSpaceRegion, sortLabel, sortComboBox,
+        		midSpaceRegion, leftArrow, pageLabel, rightArrow, rightSpaceRegion);
+        bottomSortBox.setAlignment(Pos.CENTER_LEFT);
+        bottomSortBox.setSpacing(10);
+        bottomSortBox.setPadding(new Insets(5, 5, 5, 5));
+        HBox.setHgrow(midSpaceRegion, Priority.ALWAYS);
+        
+        root.setTop(titleBox);
         root.setLeft(buttonBox);
         root.setCenter(scrollVBox);
         root.setBottom(bottomSortBox);
         
-        scrollVBox.setStyle("-fx-border-color: black");
+        scrollVBox.setStyle(blackBorderStyle);
+        
+        BorderPane.setAlignment(scrollVBox, Pos.TOP_CENTER);
+        BorderPane.setAlignment(bottomSortBox, Pos.TOP_CENTER);
         
         Scene scene = new Scene(root, 710, 600);
         primaryStage.setScene(scene);
