@@ -19,7 +19,7 @@ import javafx.stage.StageStyle;
 public class AddEditDialog {
     private static List<String> toDoItemInfo;
 
-    public static void display() {
+    public static Stage createAddDialog() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("title");
@@ -38,7 +38,7 @@ public class AddEditDialog {
         // AddEditDialog.display();
         
         window.setScene(new Scene(root, 300, 175));
-        window.showAndWait();
+        return window;
         //return login;
         
     }

@@ -93,7 +93,7 @@ public class Handler {
 			@Override
 			public void handle(Event event) {
 				// TODO Auto-generated method stub
-				stage.show();
+				stage.showAndWait();
 			}
 			
 		};

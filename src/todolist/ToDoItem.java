@@ -1,5 +1,8 @@
 package todolist;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,11 +20,25 @@ public class ToDoItem  extends BorderPane{
                 "-fx-border-style: dashed;\n";
 		
 		
-		Label priorityLabel = new Label("Priority #");
-		Label descriptionLabel = new Label("Description: Sample");
-		Label dueLabel = new Label("Due Date: 4/22/19");
-		Label statusLabel = new Label("Status: Incomplete");
-		Label completeLabel = new Label("Date Finished: 4/22/19");
+		Label priorityLabel = new Label("Priority #" + inputTask.getPriority());
+		Label descriptionLabel = new Label("Description: " + inputTask.getDescription());
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		String dueDateString = dateFormat.format(inputTask.getDueDate());
+		Label dueLabel = new Label("Due Date: " + dueDateString);
+		String status = inputTask.getStatus();
+		Label statusLabel = new Label("Status: " + status);
+		Date statusDate = inputTask.getStatusDate();
+		Label completeLabel;
+		if(status.equals("Complete")) {
+			String statusDateString = dateFormat.format(statusDate);
+			completeLabel = new Label("Date Finished: " + statusDateString);
+		}else if(status.equals("In Progress")) {
+			String statusDateString = dateFormat.format(statusDate);
+			completeLabel = new Label("Date Started: " + statusDateString);
+		}else {
+			completeLabel = new Label("");
+		}
 		
 		HBox midHBox = new HBox();
 		
