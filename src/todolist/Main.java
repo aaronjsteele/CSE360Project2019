@@ -86,6 +86,7 @@ public class Main extends Application {
     			"Name"
         	);
         final ComboBox sortComboBox = new ComboBox(sortOptions);
+        sortComboBox.getSelectionModel().selectFirst();
         Region midSpaceRegion = new Region();
         Region leftSpaceRegion = new Region();
         Region rightSpaceRegion = new Region();
