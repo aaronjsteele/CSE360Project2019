@@ -52,7 +52,7 @@ public class ToDoItem  extends BorderPane{
 				"-fx-font-size: 12px;");
 		Date statusDate = inputTask.getStatusDate();
 		Label completeLabel;
-		if(status.equals("Complete")) {
+		if(status.equals("Completed")) {
 			String statusDateString = dateFormat.format(statusDate);
 			completeLabel = new Label("Date Finished: " + statusDateString);
 			completeLabel.setStyle("-fx-text-fill: #654b00;\n" + 

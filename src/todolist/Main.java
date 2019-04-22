@@ -100,7 +100,7 @@ public class Main extends Application {
         leftArrow.setStyle("-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );");
         Button rightArrow = new Button(">");
         rightArrow.setStyle("-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );");
-        pageLabel = new Label("Showing 1-4 of 13");
+        pageLabel = new Label("Showing 0-0 of 0");
         
         leftSpaceRegion.setMinWidth(150);
         leftSpaceRegion.setMaxWidth(150);
