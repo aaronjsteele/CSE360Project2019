@@ -28,15 +28,19 @@ public class Main extends Application {
         //Parent root = FXMLLoader.load(getClass().getResource("/todolist/todolist.fxml"));
         primaryStage.setTitle("To-Do List Unlimited 2019");
         
-        String blackBorderStyle = "-fx-border-color: black";
+        String blackBorderStyle = "-fx-border-color: grey";
         
         taskList = new ArrayList<Task>();
         pageNum = new IntHolder(0);
         
         Button addButton = new Button("Add");
+        addButton.setStyle("-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );");
         Button printButton = new Button("Print");
+        printButton.setStyle("-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );");
         Button saveButton = new Button("Save");
+        saveButton.setStyle("-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );");
         Button loadButton = new Button("Load");
+        loadButton.setStyle("-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );");
         
         addButton.setMaxWidth(Double.MAX_VALUE);
         printButton.setMaxWidth(Double.MAX_VALUE);
@@ -60,7 +64,7 @@ public class Main extends Application {
 
         HBox titleBox = new HBox();
         Label titleLabel = new Label("To-Do Items");
-        titleLabel.setStyle("-fx-font-size: 20pt");
+        titleLabel.setStyle("-fx-font-size: 20pt;");
         Region leftTitleRegion = new Region();
         leftTitleRegion.setMinWidth(160);
         leftTitleRegion.setMaxWidth(160);
@@ -93,7 +97,9 @@ public class Main extends Application {
         Region leftSpaceRegion = new Region();
         Region rightSpaceRegion = new Region();
         Button leftArrow = new Button("<");
+        leftArrow.setStyle("-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );");
         Button rightArrow = new Button(">");
+        rightArrow.setStyle("-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );");
         pageLabel = new Label("Showing 1-4 of 13");
         
         leftSpaceRegion.setMinWidth(150);
