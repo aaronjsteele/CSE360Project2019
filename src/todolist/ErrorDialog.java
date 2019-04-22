@@ -27,8 +27,8 @@ public class ErrorDialog {
 		Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Error");
-        window.setWidth(300);
-        window.setHeight(100);
+        window.setWidth(450);
+        window.setHeight(130);
         window.initStyle(StageStyle.UTILITY);
         window.setResizable(false);
         
@@ -44,7 +44,7 @@ public class ErrorDialog {
         root.setSpacing(10);
         root.getChildren().addAll(errorLabel, confirmButton);
         
-        window.setScene(new Scene(root, 300, 100));
+        window.setScene(new Scene(root, 450, 130));
         return window;
 	}
 }
