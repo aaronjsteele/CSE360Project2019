@@ -31,8 +31,8 @@ public class AddDialog {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Add");
-        window.setWidth(520);
-        window.setHeight(200);
+        window.setWidth(540);
+        window.setHeight(230);
         window.initStyle(StageStyle.UTILITY);
         window.setResizable(false);
 
@@ -45,7 +45,7 @@ public class AddDialog {
         // Adding the description text field
         TextField descriptionField = new TextField();
         descriptionField.setPromptText("Enter a description");
-        descriptionField.setPrefWidth(395);
+        descriptionField.setPrefWidth(415);
         descriptionHBox.getChildren().addAll(descriptionLabel, descriptionField);
         descriptionHBox.setPadding(new Insets(5, 10, 5, 10));
         descriptionHBox.setSpacing(10);
@@ -63,9 +63,11 @@ public class AddDialog {
         dueLabel.setMinWidth(85);
         dueLabel.setMaxWidth(85);
         Label statusLabel = new Label("Status");
-        statusLabel.setMinWidth(67);
-        statusLabel.setMaxWidth(67);
+        statusLabel.setMinWidth(87);
+        statusLabel.setMaxWidth(87);
         Label dateLabel = new Label("Date Started");
+        dateLabel.setMinWidth(87);
+        dateLabel.setMaxWidth(87);
         Button addButton = new Button("Add");
         addButton.setMinWidth(100);
         addButton.setMaxWidth(100);
@@ -141,7 +143,7 @@ public class AddDialog {
 			}
         	
         });
-        window.setScene(new Scene(root, 500, 180));
+        window.setScene(new Scene(root, 540, 230));
         return window;
     }
 } 

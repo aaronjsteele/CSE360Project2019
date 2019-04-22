@@ -30,7 +30,7 @@ public class EditDialog {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Edit");
-        window.setWidth(520);
+        window.setWidth(540);
         window.setHeight(230);
         window.initStyle(StageStyle.UTILITY);
         window.setResizable(false);
@@ -62,9 +62,11 @@ public class EditDialog {
         dueLabel.setMinWidth(85);
         dueLabel.setMaxWidth(85);
         Label statusLabel = new Label("Status");
-        statusLabel.setMinWidth(67);
-        statusLabel.setMaxWidth(67);
+        statusLabel.setMinWidth(87);
+        statusLabel.setMaxWidth(87);
         Label dateLabel = new Label("Date Started");
+        dateLabel.setMinWidth(87);
+        dateLabel.setMaxWidth(87);
         Button addButton = new Button("Edit");
         addButton.setMinWidth(100);
         addButton.setMaxWidth(100);
@@ -142,7 +144,7 @@ public class EditDialog {
         progressComboBox.setOnAction(statusHandler);
         EventHandler cancelHandler = Handler.cancelHandler(window);
         cancelButton.setOnAction(cancelHandler);
-        window.setScene(new Scene(root, 500, 180));
+        window.setScene(new Scene(root, 540, 230));
         return window;
     }
 } 
