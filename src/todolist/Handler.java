@@ -242,7 +242,7 @@ public class Handler {
 							System.out.println("Something went horribly wrong");
 						}
 					}else {
-						Stage errorWindow = ErrorDialog.createErrorDialog("Please enter a valid positive integer");
+						Stage errorWindow = ErrorDialog.createErrorDialog("Please enter a valid positive integer for the priority");
 						errorWindow.showAndWait();
 					}
 				}

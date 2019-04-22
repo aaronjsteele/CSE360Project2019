@@ -36,18 +36,20 @@ public class ToDoItem  extends BorderPane{
 		Label descriptionLabel = new Label("Description: " + inputTask.getDescription());
 		descriptionLabel.setStyle("-fx-text-fill: #654b00;\n" + 
 			   	"-fx-font-weight: bold;\n" + 
-				"-fx-font-size: 14px;");
+				"-fx-font-size: 12px;");
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		String dueDateString = dateFormat.format(inputTask.getDueDate());
 		Label dueLabel = new Label("Due Date: " + dueDateString);
 		dueLabel.setStyle("-fx-text-fill: #654b00;\n" + 
 			   	"-fx-font-weight: bold;\n" + 
-				"-fx-font-size: 14px;");
+				"-fx-font-size: 12px;");
 		String status = inputTask.getStatus();
 		Label statusLabel = new Label("Status: " + status);
+		statusLabel.setMinWidth(150);
+		statusLabel.setMaxWidth(150);
 		statusLabel.setStyle("-fx-text-fill: #654b00;\n" + 
 			   	"-fx-font-weight: bold;\n" + 
-				"-fx-font-size: 14px;");
+				"-fx-font-size: 12px;");
 		Date statusDate = inputTask.getStatusDate();
 		Label completeLabel;
 		if(status.equals("Complete")) {
@@ -55,18 +57,18 @@ public class ToDoItem  extends BorderPane{
 			completeLabel = new Label("Date Finished: " + statusDateString);
 			completeLabel.setStyle("-fx-text-fill: #654b00;\n" + 
 				   	"-fx-font-weight: bold;\n" + 
-					"-fx-font-size: 14px;");
+					"-fx-font-size: 12px;");
 		}else if(status.equals("In Progress")) {
 			String statusDateString = dateFormat.format(statusDate);
 			completeLabel = new Label("Date Started: " + statusDateString);
 			completeLabel.setStyle("-fx-text-fill: #654b00;\n" + 
 				   	"-fx-font-weight: bold;\n" + 
-					"-fx-font-size: 14px;");
+					"-fx-font-size: 12px;");
 		}else {
 			completeLabel = new Label("");
 			completeLabel.setStyle("-fx-text-fill: #654b00;\n" + 
 				   	"-fx-font-weight: bold;\n" + 
-					"-fx-font-size: 14px;");
+					"-fx-font-size: 12px;");
 		}
 		
 		HBox midHBox = new HBox();
