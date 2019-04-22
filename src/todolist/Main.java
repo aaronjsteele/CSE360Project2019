@@ -122,7 +122,7 @@ public class Main extends Application {
         loadButton.setOnAction(loadHandler);
         EventHandler leftHandler = Handler.leftHandler(scrollVBox, pageLabel, pageNum, taskList);
         leftArrow.setOnAction(leftHandler);
-        Stage addDialog = AddEditDialog.createAddDialog();
+        Stage addDialog = AddDialog.createAddDialog();
         EventHandler addHandler = Handler.addHandler(addDialog);
         addButton.setOnAction(addHandler);
         

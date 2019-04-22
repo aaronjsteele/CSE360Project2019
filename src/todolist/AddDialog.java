@@ -20,13 +20,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class AddEditDialog {
+public class AddDialog {
     private static List<String> toDoItemInfo;
 
     public static Stage createAddDialog() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Add/Edit");
+        window.setTitle("Add");
         window.setWidth(500);
         window.setHeight(200);
         window.initStyle(StageStyle.UTILITY);
@@ -120,7 +120,6 @@ public class AddEditDialog {
         middleHBox.getChildren().addAll(leftVBox, rightVBox);
         
         root.getChildren().addAll(descriptionHBox, middleHBox, buttonHBox);
-        
         
         window.setScene(new Scene(root, 500, 180));
         return window;
