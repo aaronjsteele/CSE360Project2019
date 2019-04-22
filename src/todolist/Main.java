@@ -82,8 +82,8 @@ public class Main extends Application {
         ObservableList<String> sortOptions =
         	FXCollections.observableArrayList(
     			"Priority",
-    			"Due Date",
-    			"Name"
+    			"Description",
+    			"Due Date"
         	);
         final ComboBox sortComboBox = new ComboBox(sortOptions);
         Region midSpaceRegion = new Region();
@@ -123,17 +123,19 @@ public class Main extends Application {
         leftArrow.setOnAction(leftHandler);
         EventHandler rightHandler = Handler.rightHandler(scrollVBox, pageLabel, pageNum, taskList);
         rightArrow.setOnAction(rightHandler);
-        Stage addDialog = AddEditDialog.createAddDialog();
+        Stage addDialog = AddEditDialog.createAddDialog(scrollVBox,sortComboBox,pageLabel, pageNum, taskList);
         EventHandler addHandler = Handler.addHandler(addDialog);
         addButton.setOnAction(addHandler);
-        
+        EventHandler sortHandler = Handler.sortHandler(scrollVBox, sortComboBox, pageLabel, pageNum, taskList);
+        sortComboBox.setOnAction(sortHandler);
         BorderPane.setAlignment(scrollVBox, Pos.TOP_CENTER);
         BorderPane.setAlignment(bottomSortBox, Pos.TOP_CENTER);
-        
+        sortComboBox.getSelectionModel().selectFirst();
         Scene scene = new Scene(root, 700, 580);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
+        
     }
     
     public static void main(String[] args) {

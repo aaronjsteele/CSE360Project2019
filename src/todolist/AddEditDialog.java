@@ -1,9 +1,11 @@
 package todolist;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,7 +25,7 @@ import javafx.stage.StageStyle;
 public class AddEditDialog {
     private static List<String> toDoItemInfo;
 
-    public static Stage createAddDialog() {
+    public static Stage createAddDialog(VBox scrollVBox, ComboBox sortComboBox, Label pageLabel, IntHolder pageNum, ArrayList<Task> taskList) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("title");
@@ -61,11 +63,11 @@ public class AddEditDialog {
         
         ObservableList<String> progressOptions =
         	FXCollections.observableArrayList(
+        		"Incomplete",
     			"In Progress",
-    			"Finished"
+    			"Complete"
         	);
         final ComboBox progressComboBox = new ComboBox(progressOptions);
-        
         HBox priorityHBox = new HBox();
         priorityHBox.getChildren().addAll(priorityLabel, priorityField);
         HBox dueHBox = new HBox();
@@ -85,6 +87,9 @@ public class AddEditDialog {
         // for the login info. The button listeners set the login values
 
         // AddEditDialog.display();
+        Object[] inputs = {priorityField, dueField, progressComboBox, dateField, descriptionField};
+        EventHandler addHandler = Handler.addDialogHandler(scrollVBox, sortComboBox, pageLabel, pageNum, taskList, inputs);
+        addButton.setOnAction(addHandler);
         
         window.setScene(new Scene(root, 400, 200));
         return window;

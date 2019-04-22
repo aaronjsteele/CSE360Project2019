@@ -110,6 +110,17 @@ public class Task {
 		});
 	}
 	public static void addTask(ArrayList<Task> taskList, int priority, String description, Date dueDate, Date statusDate, String status) {
+		int maxPriority = 0;
+		for(Task iteratingTask: taskList) {
+			int iteratingPriority = iteratingTask.getPriority();
+			if(iteratingPriority >= priority) {
+				iteratingTask.setPriority(iteratingPriority + 1 );
+			}
+			maxPriority = Math.max(maxPriority, iteratingPriority);
+		}
+		if(priority > maxPriority + 1) {
+			priority = maxPriority + 1;
+		}
 		Task createdTask = new Task(priority, description, dueDate, statusDate, status);
 		taskList.add(createdTask);
 	}
