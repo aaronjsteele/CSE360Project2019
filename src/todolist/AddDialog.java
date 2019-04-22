@@ -63,11 +63,11 @@ public class AddDialog {
         dueLabel.setMinWidth(85);
         dueLabel.setMaxWidth(85);
         Label statusLabel = new Label("Status");
-        statusLabel.setMinWidth(87);
-        statusLabel.setMaxWidth(87);
+        statusLabel.setMinWidth(92);
+        statusLabel.setMaxWidth(92);
         Label dateLabel = new Label("Date Started");
-        dateLabel.setMinWidth(87);
-        dateLabel.setMaxWidth(87);
+        dateLabel.setMinWidth(92);
+        dateLabel.setMaxWidth(92);
         Button addButton = new Button("Add");
         addButton.setMinWidth(100);
         addButton.setMaxWidth(100);
