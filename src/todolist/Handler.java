@@ -238,4 +238,14 @@ public class Handler {
 		};
 		return eventHandler;
 	}
+	public static EventHandler saveHandler(ArrayList<Task> taskList) {
+		EventHandler eventHandler = new EventHandler() {
+			
+			@Override
+			public void handle(Event event) {
+				Task.saveFile(taskList);
+			}
+		};
+		return eventHandler;
+	}
 }
