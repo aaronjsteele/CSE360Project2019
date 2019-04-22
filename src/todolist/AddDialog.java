@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -109,7 +111,7 @@ public class AddDialog {
         dateHBox.setPadding(new Insets(5, 10, 5, 10));
         dateHBox.setSpacing(10);
         dateHBox.setAlignment(Pos.CENTER_LEFT);
-        
+        dateHBox.setVisible(false);
         // Adds the elements to the left and right VBoxes
         leftVBox.getChildren().addAll(priorityHBox, dueHBox);
         rightVBox.getChildren().addAll(statusHBox, dateHBox);
@@ -127,10 +129,19 @@ public class AddDialog {
 
         // AddEditDialog.display();
         Object[] inputs = {priorityField, dueField, progressComboBox, dateField, descriptionField};
-        EventHandler addHandler = Handler.addDialogHandler(scrollVBox, sortComboBox, pageLabel, pageNum, taskList, inputs);
+        EventHandler statusHandler = Handler.statusHandler(dateHBox, progressComboBox);
+        progressComboBox.setOnAction(statusHandler);
+        EventHandler addHandler = Handler.addDialogHandler(scrollVBox, sortComboBox, pageLabel, pageNum, taskList, inputs, window);
         addButton.setOnAction(addHandler);
-
-        window.setScene(new Scene(root, 520, 200));
+        cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				window.close();
+			}
+        	
+        });
+        window.setScene(new Scene(root, 500, 180));
         return window;
     }
 } 

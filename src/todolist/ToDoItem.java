@@ -3,6 +3,7 @@ package todolist;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class ToDoItem  extends BorderPane{
 	public ToDoItem(Task inputTask) {
@@ -57,6 +59,9 @@ public class ToDoItem  extends BorderPane{
 		
 		HBox bottomButtonBox = new HBox();
 		Button editButton = new Button("Edit");
+		Stage editStage = EditDialog.createEditDialog(inputTask);
+		EventHandler editHandler = Handler.editHandler(editStage);
+		editButton.setOnAction(editHandler);
 		Button deleteButton = new Button("Delete");
 		deleteButton.setPrefWidth(80.0);
 		editButton.setPrefWidth(80.0);

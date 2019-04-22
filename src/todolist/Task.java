@@ -124,12 +124,31 @@ public class Task {
 		Task createdTask = new Task(priority, description, dueDate, statusDate, status);
 		taskList.add(createdTask);
 	}
-	public static void editTask(Task task,int priority, String description, Date dueDate, Date statusDate, String status ) {
-		task.setPriority(priority);
+	public static void editTask(Task task,ArrayList<Task> taskList, int priority, String description, Date dueDate, Date statusDate, String status ) {
+		
+		task.setStatus(status);
 		task.setDescription(description);
 		task.setDueDate(dueDate);
-		task.setStatusDate(statusDate); 	
-		task.setStatus(status);
+		task.setStatusDate(statusDate);
+		int maxPriority = 0;
+		for(Task iteratingTask: taskList) {
+			int iteratingPriority = iteratingTask.getPriority();
+			if(iteratingPriority > task.getPriority()) {
+				iteratingTask.setPriority(iteratingPriority - 1 );
+			}
+		}
+		for(Task iteratingTask: taskList) {
+			int iteratingPriority = iteratingTask.getPriority();
+			if(iteratingPriority >= priority) {
+				iteratingTask.setPriority(iteratingPriority + 1 );
+			}
+			maxPriority = Math.max(maxPriority, iteratingPriority);
+		}
+		if(priority > maxPriority + 1) {
+			priority = maxPriority + 1;
+		}
+		task.setPriority(priority);
+		
 	}
 	public static void deleteTask(Task task, ArrayList<Task> taskList) {
 		int taskIndex = taskList.indexOf(task);
