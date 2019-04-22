@@ -2,7 +2,13 @@ package todolist;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+
+import java.util.ArrayList;
+
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -19,6 +25,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("/todolist/todolist.fxml"));
         primaryStage.setTitle("To-Do List Unlimited 2019");
+        
+        String blackBorderStyle = "-fx-border-color: black";
+        
+        ArrayList<Task> taskList = new ArrayList<Task>();
         
         Button addButton = new Button("Add");
         Button printButton = new Button("Print");
@@ -47,8 +57,9 @@ public class Main extends Application {
         
         scrollWindow.setPrefWidth(550);
         scrollVBox.setFillWidth(true);
-                
-        for (int i = 1; i < 7; ++i) {
+        EventHandler loadHandler = Handler.loadHandler(scrollVBox, taskList);
+        loadButton.setOnAction(loadHandler);
+        for (int i = 1; i < 5; ++i) {
         	Task newTask = new Task();
         	ToDoItem newToDoItem = new ToDoItem(newTask);
         	newToDoItem.setPrefWidth(550);
@@ -58,17 +69,66 @@ public class Main extends Application {
         	scrollVBox.getChildren().add(newToDoItem);
         }
         
-        anchorCenter.getChildren().add(scrollWindow);
-        AnchorPane.setTopAnchor(scrollWindow, 0.0);
-        AnchorPane.setBottomAnchor(scrollWindow, 0.0);
-        AnchorPane.setLeftAnchor(scrollWindow, 0.0);
-        AnchorPane.setRightAnchor(scrollWindow, 0.0);
-        
-        VBox titleBox = new VBox();
+
+        HBox titleBox = new HBox();
         Label titleLabel = new Label("To-Do Items");
+        Region leftTitleRegion = new Region();
+        leftTitleRegion.setMinWidth(160);
+        leftTitleRegion.setMaxWidth(160);
         
+        Region rightTitleRegion = new Region();
+        titleBox.getChildren().addAll(leftTitleRegion, titleLabel, rightTitleRegion);
+        titleBox.setPrefHeight(25);
+        titleBox.setMinHeight(25);
+        titleBox.setMaxHeight(25);
+        
+        titleBox.setAlignment(Pos.CENTER_LEFT);
+        
+
+        // Creates the bottom portion of the main UI
+        HBox bottomSortBox = new HBox();
+        bottomSortBox.setPrefHeight(50);
+        bottomSortBox.setMaxHeight(50);
+        bottomSortBox.setMinHeight(50);
+        
+        Label sortLabel = new Label("Sort By:");
+
+        ObservableList<String> sortOptions =
+        	FXCollections.observableArrayList(
+    			"Priority",
+    			"Due Date",
+    			"Name"
+        	);
+        final ComboBox sortComboBox = new ComboBox(sortOptions);
+        Region midSpaceRegion = new Region();
+        Region leftSpaceRegion = new Region();
+        Region rightSpaceRegion = new Region();
+        Button leftArrow = new Button("<");
+        Button rightArrow = new Button(">");
+        Label pageLabel = new Label("Showing 1-4 of 13");
+        
+        leftSpaceRegion.setMinWidth(150);
+        leftSpaceRegion.setMaxWidth(150);
+        
+        rightSpaceRegion.setMinWidth(20);
+        rightSpaceRegion.setMaxWidth(20);
+        
+        bottomSortBox.getChildren().addAll(leftSpaceRegion, sortLabel, sortComboBox,
+        		midSpaceRegion, leftArrow, pageLabel, rightArrow, rightSpaceRegion);
+        bottomSortBox.setAlignment(Pos.CENTER_LEFT);
+        bottomSortBox.setSpacing(10);
+        bottomSortBox.setPadding(new Insets(5, 5, 5, 5));
+        HBox.setHgrow(midSpaceRegion, Priority.ALWAYS);
+        
+        root.setTop(titleBox);
         root.setLeft(buttonBox);
-        root.setCenter(anchorCenter);
+        root.setCenter(scrollVBox);
+        root.setBottom(bottomSortBox);
+        
+        scrollVBox.setStyle(blackBorderStyle);
+        
+        BorderPane.setAlignment(scrollVBox, Pos.TOP_CENTER);
+        BorderPane.setAlignment(bottomSortBox, Pos.TOP_CENTER);
         
         Scene scene = new Scene(root, 710, 650);
         primaryStage.setScene(scene);
