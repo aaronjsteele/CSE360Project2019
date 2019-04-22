@@ -263,6 +263,19 @@ public class Handler {
 		};
 		return eventHandler;
 	}
+	public static EventHandler displayAllHandler(ArrayList<Task> taskList) {
+		EventHandler eventHandler = new EventHandler() {
+
+			@Override
+			public void handle(Event event) {
+				// TODO Auto-generated method stub
+				Stage stage = DisplayDialog.createDisplayDialog(taskList);
+				stage.showAndWait();
+			}
+			
+		};
+		return eventHandler;
+	}
 	public static Integer tryParse(String text) {
 		try {
 			return Integer.parseInt(text);

@@ -149,6 +149,8 @@ public class Main extends Application {
         saveButton.setOnAction(saveHandler);
         EventHandler resetHandler = Handler.resetHandler();
         startOverButton.setOnAction(resetHandler);
+        EventHandler displayHandler = Handler.displayAllHandler(taskList);
+        displayButton.setOnAction(displayHandler);
         BorderPane.setAlignment(scrollVBox, Pos.TOP_CENTER);
         BorderPane.setAlignment(bottomSortBox, Pos.TOP_CENTER);
         sortComboBox.getSelectionModel().selectFirst();

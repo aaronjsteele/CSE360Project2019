@@ -1,6 +1,7 @@
 package todolist;
 
 import java.io.*;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,6 +57,20 @@ public class Task {
 	}
 	public String getStatus() {
 		return status;
+	}
+	public String getDueDateString() {
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		String dateDueString = dateFormat.format(dueDate);
+		return dateDueString;
+	}
+	public String getStatusDateString() {
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		String dateStatusString;
+		if (statusDate != null)
+			dateStatusString = dateFormat.format(statusDate);
+		else
+			dateStatusString = "";
+		return dateStatusString;
 	}
 	public String toPrintFormat() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");

@@ -1,7 +1,11 @@
 package todolist;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -13,6 +17,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -31,10 +36,17 @@ public class DisplayDialog {
 		Stage window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Display");
-        window.setWidth(400);
-        window.setHeight(600);
+        window.setWidth(700);
+        window.setHeight(400);
         window.initStyle(StageStyle.UTILITY);
         window.setResizable(false);
+        
+        ArrayList<TaskStrings> taskStringsList = new ArrayList<TaskStrings>();
+        
+        for (int i = 0; i < taskList.size(); ++i) {
+        	taskStringsList.add(new TaskStrings(taskList.get(i)));
+        }
+        
         
         VBox root = new VBox();
         
@@ -42,31 +54,32 @@ public class DisplayDialog {
         
         TableView taskTable = new TableView();
         
-        TableColumn<Integer, Task> column1 = new TableColumn<>("Priority");
+        TableColumn<Integer, TaskStrings> column1 = new TableColumn<>("Priority");
         column1.setCellValueFactory(new PropertyValueFactory<>("priority"));
         
-        TableColumn<String, Task> column2 = new TableColumn<>("Description");
-        column1.setCellValueFactory(new PropertyValueFactory<>("description"));
+        TableColumn<String, TaskStrings> column2 = new TableColumn<>("Description");
+        column2.setCellValueFactory(new PropertyValueFactory<>("description"));
         
-        TableColumn<Date, Task> column3 = new TableColumn<>("Due Date");
-        column1.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
-        
-        TableColumn<Date, Task> column4 = new TableColumn<>("Start/Finish Date");
-        column1.setCellValueFactory(new PropertyValueFactory<>("statusDate"));
-        TableColumn<String, Task> column5 = new TableColumn<>("Status");
-        column1.setCellValueFactory(new PropertyValueFactory<>("status"));
+        TableColumn<String, TaskStrings> column3 = new TableColumn<>("Due Date");
+        column3.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+
+        TableColumn<String, TaskStrings> column4 = new TableColumn<>("Start/Finish Date");
+        column4.setCellValueFactory(new PropertyValueFactory<>("statusDate"));
+
+        TableColumn<String, TaskStrings> column5 = new TableColumn<>("Status");
+        column5.setCellValueFactory(new PropertyValueFactory<>("status"));
         
         taskTable.getColumns().addAll(column1, column2, column3, column5, column4);
         
         // Add items from ArrayList here!
-        taskTable.setItems(FXCollections.observableArrayList(taskList));
+        taskTable.setItems(FXCollections.observableArrayList(taskStringsList));
         
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
         scrollPane.setContent(root);
         
         root.getChildren().add(taskTable);
-        window.setScene(new Scene(root, 400, 600));
+        window.setScene(new Scene(root, 700, 400));
         return window;
 	}
 

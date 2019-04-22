@@ -7,7 +7,7 @@ Priority:		2
 Description:	Something I Used to Want to Do
 Due Date:		04/28/2019
 Date Finished:	04/20/2019
-Status:			Complete
+Status:			Completed
 
 Priority:		3
 Description:	Something I Want to Do
@@ -24,7 +24,7 @@ Priority:		5
 Description:	Something I Used to Want to Do
 Due Date:		04/28/2019
 Date Finished:	04/20/2019
-Status:			Complete
+Status:			Completed
 
 Priority:		6
 Description:	Something I Want to Do
@@ -41,10 +41,11 @@ Priority:		8
 Description:	Something I Used to Want to Do
 Due Date:		04/28/2019
 Date Finished:	04/20/2019
-Status:			Complete
+Status:			Completed
 
 Priority:		9
 Description:	no
 Due Date:		04/25/2019
+Date Finished:	04/20/2019
 Status:			Completed
 
