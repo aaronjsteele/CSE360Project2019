@@ -41,18 +41,24 @@ public class Main extends Application {
         saveButton.setStyle("-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );");
         Button loadButton = new Button("Load");
         loadButton.setStyle("-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );");
+        Button displayButton = new Button("Display All");
+        displayButton.setStyle("-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );");
+        Button startOverButton = new Button("Start Over");
+        startOverButton.setStyle("-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );");
         
         addButton.setMaxWidth(Double.MAX_VALUE);
         printButton.setMaxWidth(Double.MAX_VALUE);
         saveButton.setMaxWidth(Double.MAX_VALUE);
         loadButton.setMaxWidth(Double.MAX_VALUE);
+        displayButton.setMaxWidth(Double.MAX_VALUE);
+        startOverButton.setMaxWidth(Double.MAX_VALUE);
         
         BorderPane root = new BorderPane();
         VBox buttonBox = new VBox();
         buttonBox.setPrefWidth(150);   
         buttonBox.setSpacing(10);
         buttonBox.setPadding(new Insets(10, 10, 10, 10)); 
-        buttonBox.getChildren().addAll(addButton, printButton, saveButton, loadButton);
+        buttonBox.getChildren().addAll(addButton, displayButton, printButton, saveButton, loadButton, startOverButton);
         buttonBox.setMinHeight(500);
         buttonBox.setMaxHeight(500);
         
