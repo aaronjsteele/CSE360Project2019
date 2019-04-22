@@ -299,7 +299,7 @@ public class Handler {
 		};
 		return eventHandler;
 	}
-	public static EventHandler statusHandler(HBox dateHBox, ComboBox progressComboBox) {
+	public static EventHandler statusHandler(HBox dateHBox, ComboBox progressComboBox, Label dateLabel) {
 		EventHandler eventHandler = new EventHandler() {
 			@Override
 			public void handle(Event event) {
@@ -309,6 +309,11 @@ public class Handler {
 					dateHBox.setVisible(false);
 				}else {
 					dateHBox.setVisible(true);
+					if(status.equals("In Progress")) {
+						dateLabel.setText("Date Started");
+					}else {
+						dateLabel.setText("Date Finished");
+					}
 				}
 			}
 			

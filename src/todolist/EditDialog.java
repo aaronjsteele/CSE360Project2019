@@ -121,6 +121,10 @@ public class EditDialog {
         dateHBox.setAlignment(Pos.CENTER_LEFT);
         if(task.getStatus().equals("Incomplete")) {
         	dateHBox.setVisible(false);
+        }else if(task.getStatus().equals("In Progress")) {
+        	dateLabel.setText("Date Started");
+        }else {
+        	dateLabel.setText("Date Finished");
         }
         // Adds the elements to the left and right VBoxes
         leftVBox.getChildren().addAll(priorityHBox, dueHBox);
@@ -138,7 +142,7 @@ public class EditDialog {
         Object[] inputs = {priorityField, dueField, progressComboBox, dateField, descriptionField};
         EventHandler editDialogHandler = Handler.editDialogHandler(Main.scrollVBox, Main.sortComboBox, Main.pageLabel, Main.pageNum, Main.taskList, task, inputs, window);
         addButton.setOnAction(editDialogHandler);
-        EventHandler statusHandler = Handler.statusHandler(dateHBox, progressComboBox);
+        EventHandler statusHandler = Handler.statusHandler(dateHBox, progressComboBox, dateLabel);
         progressComboBox.setOnAction(statusHandler);
         EventHandler cancelHandler = Handler.cancelHandler(window);
         cancelButton.setOnAction(cancelHandler);

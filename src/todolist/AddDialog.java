@@ -129,7 +129,7 @@ public class AddDialog {
 
         // AddEditDialog.display();
         Object[] inputs = {priorityField, dueField, progressComboBox, dateField, descriptionField};
-        EventHandler statusHandler = Handler.statusHandler(dateHBox, progressComboBox);
+        EventHandler statusHandler = Handler.statusHandler(dateHBox, progressComboBox, dateLabel);
         progressComboBox.setOnAction(statusHandler);
         EventHandler addHandler = Handler.addDialogHandler(scrollVBox, sortComboBox, pageLabel, pageNum, taskList, inputs, window);
         addButton.setOnAction(addHandler);
