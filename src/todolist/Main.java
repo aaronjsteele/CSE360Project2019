@@ -3,8 +3,6 @@ package todolist;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -21,8 +19,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("/todolist/todolist.fxml"));
         primaryStage.setTitle("To-Do List Unlimited 2019");
-        
-        String blackBorderStyle = "-fx-border-color: black";
         
         Button addButton = new Button("Add");
         Button printButton = new Button("Print");
@@ -41,12 +37,18 @@ public class Main extends Application {
         buttonBox.setPadding(new Insets(10, 10, 10, 10)); 
         buttonBox.getChildren().addAll(addButton, printButton, saveButton, loadButton);
         
+        
+        AnchorPane anchorCenter = new AnchorPane();
+        
+        ScrollPane scrollWindow = new ScrollPane();
         VBox scrollVBox = new VBox();
-        scrollVBox.setPrefWidth(550);
-        scrollVBox.setPrefHeight(500);
-        scrollVBox.setMaxHeight(500);
+       
+        scrollWindow.setContent(scrollVBox);
+        
+        scrollWindow.setPrefWidth(550);
+        scrollVBox.setFillWidth(true);
                 
-        for (int i = 1; i < 5; ++i) {
+        for (int i = 1; i < 7; ++i) {
         	Task newTask = new Task();
         	ToDoItem newToDoItem = new ToDoItem(newTask);
         	newToDoItem.setPrefWidth(550);
@@ -56,39 +58,19 @@ public class Main extends Application {
         	scrollVBox.getChildren().add(newToDoItem);
         }
         
+        anchorCenter.getChildren().add(scrollWindow);
+        AnchorPane.setTopAnchor(scrollWindow, 0.0);
+        AnchorPane.setBottomAnchor(scrollWindow, 0.0);
+        AnchorPane.setLeftAnchor(scrollWindow, 0.0);
+        AnchorPane.setRightAnchor(scrollWindow, 0.0);
+        
         VBox titleBox = new VBox();
         Label titleLabel = new Label("To-Do Items");
         
-        // Creates the bottom portion of the main UI
-        HBox bottomSortBox = new HBox();
-        bottomSortBox.setPrefHeight(50);
-        bottomSortBox.setMaxHeight(50);
-        bottomSortBox.setMinHeight(50);
-        
-        Label sortLabel = new Label("Sort By:");
-
-        ObservableList<String> sortOptions =
-        	FXCollections.observableArrayList(
-    			"Priority",
-    			"Due Date",
-    			"Name"
-        	);
-        final ComboBox sortComboBox = new ComboBox(sortOptions);
-        Region midSpaceRegion = new Region();
-        Button leftArrow = new Button("<");
-        Button rightArrow = new Button(">");
-        Label pageLabel = new Label("Showing 1-4 of 13");
-        
-        bottomSortBox.getChildren().addAll(sortLabel, sortComboBox,
-        		midSpaceRegion, leftArrow, pageLabel, rightArrow);
-        
         root.setLeft(buttonBox);
-        root.setCenter(scrollVBox);
-        root.setBottom(bottomSortBox);
+        root.setCenter(anchorCenter);
         
-        scrollVBox.setStyle("-fx-border-color: black");
-        
-        Scene scene = new Scene(root, 710, 600);
+        Scene scene = new Scene(root, 710, 650);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();

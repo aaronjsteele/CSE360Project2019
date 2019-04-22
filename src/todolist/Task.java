@@ -163,6 +163,7 @@ public class Task {
 				e.printStackTrace();
 			}
 		}
+		sort(taskList, "Priority");
 		return taskList;
 	}
 	public static void saveFile(ArrayList<Task> taskList) {
