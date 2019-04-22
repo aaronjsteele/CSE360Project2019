@@ -34,6 +34,9 @@ public class ErrorDialog {
         
         Label errorLabel = new Label(errorMessage);
         Button confirmButton = new Button("OK");
+        EventHandler confirmHandler = Handler.cancelHandler(window);
+        confirmButton.setOnAction(confirmHandler);
+        
         
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);

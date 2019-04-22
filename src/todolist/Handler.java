@@ -159,12 +159,13 @@ public class Handler {
 		};
 		return eventHandler;
 	}
-	public static EventHandler addHandler(Stage stage) {
+	public static EventHandler addHandler() {
 		EventHandler eventHandler = new EventHandler() {
 
 			@Override
 			public void handle(Event event) {
 				// TODO Auto-generated method stub
+				Stage stage = AddDialog.createAddDialog();
 				stage.showAndWait();
 			}
 			
@@ -182,47 +183,68 @@ public class Handler {
 				ComboBox progressComboBox = (ComboBox)inputs[2];
 				TextField dateField = (TextField)inputs[3];
 				TextField descriptionField = (TextField)inputs[4];
-				pageNum.setNumber(0);
-				scrollVBox.getChildren().clear();
+				
 				SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 				String dueDateString = dueField.getText();
 				String statusDateString = dateField.getText();
 				String status = (String)progressComboBox.getValue();
 				String description = descriptionField.getText();
-				try {
-					int priority = Integer.parseInt(priorityField.getText());
-					Date dueDate = dateFormat.parse(dueDateString);
-					Date statusDate = null;
-					if(status != "Incomplete") {
-						statusDate = dateFormat.parse(statusDateString);
+				boolean exists = false;
+				for(Task task: Main.taskList) {
+					if(task.getDescription().equals(description)) {
+						exists = true;
 					}
-					Task.addTask(taskList, priority, description, dueDate, statusDate, status);
-					String sortBy = (String)sortComboBox.getValue();
-					Task.sort(taskList, sortBy);
-					for(int index = 0; index < taskList.size() && index < 4; index++) {
-						Task newTask = taskList.get(index);
-						ToDoItem newToDoItem = new ToDoItem(newTask);
-						scrollVBox.getChildren().add(newToDoItem);
+				}
+				if(exists) {
+					Stage errorWindow = ErrorDialog.createErrorDialog("Please enter a unique description");
+					errorWindow.showAndWait();
+				}else {
+					int priority = -1;
+					Integer prior = tryParse(priorityField.getText());
+					if(prior != null) {
+						priority = prior.intValue();
 					}
-					int taskSize = taskList.size();
-					String output = "Showing ";
-					if(taskSize > 0) {
-						output += "1-";
+					if(prior != null && priority > 0) {
+						pageNum.setNumber(0);
+						scrollVBox.getChildren().clear();
+						try {
+							Date dueDate = dateFormat.parse(dueDateString);
+							Date statusDate = null;
+							if(status != "Incomplete") {
+								statusDate = dateFormat.parse(statusDateString);
+							}
+							Task.addTask(taskList, priority, description, dueDate, statusDate, status);
+							String sortBy = (String)sortComboBox.getValue();
+							Task.sort(taskList, sortBy);
+							for(int index = 0; index < taskList.size() && index < 4; index++) {
+								Task newTask = taskList.get(index);
+								ToDoItem newToDoItem = new ToDoItem(newTask);
+								scrollVBox.getChildren().add(newToDoItem);
+							}
+							int taskSize = taskList.size();
+							String output = "Showing ";
+							if(taskSize > 0) {
+								output += "1-";
+							}else {
+								output += "0-";
+							}
+							if(taskSize >= 4) {
+								output += "4 of ";
+							}else {
+								output += taskSize + " of ";
+							}
+							output += taskSize;
+							pageLabel.setText(output);
+							stage.close();
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							System.out.println("Something went horribly wrong");
+						}
 					}else {
-						output += "0-";
+						Stage errorWindow = ErrorDialog.createErrorDialog("Please enter a valid positive integer");
+						errorWindow.showAndWait();
 					}
-					if(taskSize >= 4) {
-						output += "4 of ";
-					}else {
-						output += taskSize + " of ";
-					}
-					output += taskSize;
-					pageLabel.setText(output);
-					stage.close();
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					System.out.println("Something went horribly wrong");
 				}
 			}
 			
@@ -241,6 +263,13 @@ public class Handler {
 		};
 		return eventHandler;
 	}
+	public static Integer tryParse(String text) {
+		try {
+			return Integer.parseInt(text);
+		}catch(NumberFormatException e){
+			return null;
+		}
+	}
 	public static EventHandler editDialogHandler(VBox scrollVBox, ComboBox sortComboBox,Label pageLabel, IntHolder pageNum, ArrayList<Task> taskList, Task task, Object[] inputs, Stage stage) {
 		EventHandler eventHandler = new EventHandler() {
 
@@ -252,47 +281,67 @@ public class Handler {
 				ComboBox progressComboBox = (ComboBox)inputs[2];
 				TextField dateField = (TextField)inputs[3];
 				TextField descriptionField = (TextField)inputs[4];
-				pageNum.setNumber(0);
-				scrollVBox.getChildren().clear();
 				SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 				String dueDateString = dueField.getText();
 				String statusDateString = dateField.getText();
 				String status = (String)progressComboBox.getValue();
 				String description = descriptionField.getText();
-				try {
-					int priority = Integer.parseInt(priorityField.getText());
-					Date dueDate = dateFormat.parse(dueDateString);
-					Date statusDate = null;
-					if(status != "Incomplete") {
-						statusDate = dateFormat.parse(statusDateString);
+				boolean exists = false;
+				for(Task iteratetask: Main.taskList) {
+					if(iteratetask.getDescription().equals(description)&& iteratetask != task) {
+						exists = true;
 					}
-					Task.editTask(task, Main.taskList, priority, description, dueDate, statusDate, status);
-					String sortBy = (String)sortComboBox.getValue();
-					Task.sort(taskList, sortBy);
-					for(int index = 0; index < taskList.size() && index < 4; index++) {
-						Task newTask = taskList.get(index);
-						ToDoItem newToDoItem = new ToDoItem(newTask);
-						scrollVBox.getChildren().add(newToDoItem);
+				}
+				if(exists) {
+					Stage errorWindow = ErrorDialog.createErrorDialog("Please enter a unique description");
+					errorWindow.showAndWait();
+				}else {
+					int priority = -1;
+					Integer prior = tryParse(priorityField.getText());
+					if(prior != null) {
+						priority = prior.intValue();
 					}
-					int taskSize = taskList.size();
-					String output = "Showing ";
-					if(taskSize > 0) {
-						output += "1-";
+					if(prior != null && priority > 0) {
+						pageNum.setNumber(0);
+						scrollVBox.getChildren().clear();
+						try {
+							Date dueDate = dateFormat.parse(dueDateString);
+							Date statusDate = null;
+							if(status != "Incomplete") {
+								statusDate = dateFormat.parse(statusDateString);
+							}
+							Task.editTask(task, Main.taskList, priority, description, dueDate, statusDate, status);
+							String sortBy = (String)sortComboBox.getValue();
+							Task.sort(taskList, sortBy);
+							for(int index = 0; index < taskList.size() && index < 4; index++) {
+								Task newTask = taskList.get(index);
+								ToDoItem newToDoItem = new ToDoItem(newTask);
+								scrollVBox.getChildren().add(newToDoItem);
+							}
+							int taskSize = taskList.size();
+							String output = "Showing ";
+							if(taskSize > 0) {
+								output += "1-";
+							}else {
+								output += "0-";
+							}
+							if(taskSize >= 4) {
+								output += "4 of ";
+							}else {
+								output += taskSize + " of ";
+							}
+							output += taskSize;
+							pageLabel.setText(output);
+							stage.close();
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							System.out.println("Something went horribly wrong");
+						}
 					}else {
-						output += "0-";
+						Stage errorWindow = ErrorDialog.createErrorDialog("Please enter a valid positive integer");
+						errorWindow.showAndWait();
 					}
-					if(taskSize >= 4) {
-						output += "4 of ";
-					}else {
-						output += taskSize + " of ";
-					}
-					output += taskSize;
-					pageLabel.setText(output);
-					stage.close();
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					System.out.println("Something went horribly wrong");
 				}
 			}
 			
