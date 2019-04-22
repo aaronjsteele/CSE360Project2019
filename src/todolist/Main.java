@@ -1,5 +1,7 @@
 package todolist;
 
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -23,13 +25,18 @@ public class Main extends Application {
         Button saveButton = new Button("Save");
         Button loadButton = new Button("Load");
         
+        addButton.setMaxWidth(Double.MAX_VALUE);
+        printButton.setMaxWidth(Double.MAX_VALUE);
+        saveButton.setMaxWidth(Double.MAX_VALUE);
+        loadButton.setMaxWidth(Double.MAX_VALUE);
+        
         BorderPane root = new BorderPane();
         VBox buttonBox = new VBox();
-        buttonBox.getChildren().add(addButton);
-        buttonBox.getChildren().add(printButton);
-        buttonBox.getChildren().add(saveButton);
-        buttonBox.getChildren().add(loadButton);        
+        buttonBox.setPrefWidth(150);   
         buttonBox.setSpacing(10);
+        buttonBox.setPadding(new Insets(10, 10, 10, 10)); 
+        buttonBox.getChildren().addAll(addButton, printButton, saveButton, loadButton);
+        
         
         AnchorPane anchorCenter = new AnchorPane();
         
@@ -38,14 +45,15 @@ public class Main extends Application {
        
         scrollWindow.setContent(scrollVBox);
         
-        scrollWindow.setPrefWidth(400);
-        scrollWindow.setMinWidth(300);
-        scrollVBox.setMinWidth(Control.USE_PREF_SIZE);
+        scrollWindow.setPrefWidth(550);
+        scrollVBox.setFillWidth(true);
                 
-        for (int i = 1; i < 4; ++i) {
+        for (int i = 1; i < 7; ++i) {
         	Task newTask = new Task();
         	ToDoItem newToDoItem = new ToDoItem(newTask);
-        	newToDoItem.setPrefWidth(500);
+        	newToDoItem.setPrefWidth(550);
+        	newToDoItem.setMinWidth(550);
+        	newToDoItem.setMaxWidth(550);
         	scrollVBox.getChildren().add(newToDoItem);
         }
         
@@ -58,8 +66,9 @@ public class Main extends Application {
         root.setLeft(buttonBox);
         root.setCenter(anchorCenter);
         
-        Scene scene = new Scene(root, 600, 300);
+        Scene scene = new Scene(root, 710, 600);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
     
@@ -71,20 +80,23 @@ public class Main extends Application {
                     "-fx-border-style: dashed;\n";
     		
     		Label priorityLabel = new Label("Priority #");
-    		GridPane textGrid = new GridPane();
-    		textGrid.setPrefWidth(400);
+    		HBox midHBox = new HBox();
     		
     		VBox leftTextBox = new VBox();
-    		leftTextBox.getChildren().add(new Label("test 1"));
-    		leftTextBox.getChildren().add(new Label("test 2"));
+    		Label label1 = new Label("test 1");
+    		Label label2 = new Label("test 2");
+    		leftTextBox.getChildren().addAll(label1, label2);
+    		leftTextBox.setPadding(new Insets(5,5,5,5));
     		
     		VBox rightTextBox = new VBox();
     		rightTextBox.getChildren().add(new Label("test 3"));
     		rightTextBox.getChildren().add(new Label("test 4"));
+    		rightTextBox.setPadding(new Insets(5,5,5,5));
     		
-    		textGrid.add(leftTextBox, 0, 0);
-    		textGrid.add(rightTextBox, 1, 0);
-    		textGrid.setAlignment(Pos.CENTER);
+    		Region midRegion = new Region();
+    		
+    		midHBox.getChildren().addAll(leftTextBox, midRegion, rightTextBox);
+    		HBox.setHgrow(midRegion, Priority.ALWAYS);
     		
     		HBox bottomButtonBox = new HBox();
     		Button editButton = new Button("Edit");
@@ -92,12 +104,12 @@ public class Main extends Application {
     		editButton.setMinWidth(80.0);
     		editButton.setPrefWidth(80.0);
     		editButton.setMaxWidth(80.0);
-    		bottomButtonBox.getChildren().add(editButton);
-    		bottomButtonBox.getChildren().add(deleteButton);
+    		bottomButtonBox.getChildren().addAll(editButton, deleteButton);
+    		bottomButtonBox.setSpacing(10);
+    		bottomButtonBox.setPadding(new Insets(10, 5, 10, 5));
     		
-    		bottomButtonBox.setHgrow(deleteButton, Priority.ALWAYS);
     		setTop(priorityLabel);
-    		setCenter(textGrid);
+    		setCenter(midHBox);
     		setBottom(bottomButtonBox);
     		
     		setPrefHeight(50);
