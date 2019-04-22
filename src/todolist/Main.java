@@ -40,6 +40,8 @@ public class Main extends Application {
         buttonBox.setSpacing(10);
         buttonBox.setPadding(new Insets(10, 10, 10, 10)); 
         buttonBox.getChildren().addAll(addButton, printButton, saveButton, loadButton);
+        buttonBox.setMinHeight(500);
+        buttonBox.setMaxHeight(500);
         
         VBox scrollVBox = new VBox();
         scrollVBox.setPrefWidth(550);
@@ -52,7 +54,8 @@ public class Main extends Application {
         	newToDoItem.setPrefWidth(550);
         	newToDoItem.setMinWidth(550);
         	newToDoItem.setMaxWidth(550);
-        	newToDoItem.setPrefHeight(125);
+        	newToDoItem.setMinHeight(125);
+        	newToDoItem.setMaxHeight(125);
         	scrollVBox.getChildren().add(newToDoItem);
         }
         
@@ -110,7 +113,9 @@ public class Main extends Application {
         root.setCenter(scrollVBox);
         root.setBottom(bottomSortBox);
         
+        bottomSortBox.setStyle(blackBorderStyle);
         scrollVBox.setStyle(blackBorderStyle);
+        buttonBox.setStyle(blackBorderStyle);
         
         BorderPane.setAlignment(scrollVBox, Pos.TOP_CENTER);
         BorderPane.setAlignment(bottomSortBox, Pos.TOP_CENTER);
