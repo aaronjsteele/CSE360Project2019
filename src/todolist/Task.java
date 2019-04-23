@@ -77,17 +77,17 @@ public class Task {
 		String taskString = "";
 		String dueDateString = dateFormat.format(dueDate);
 		String statusDateString;
-		taskString += "Priority:\t\t" + priority + "\n";
-		taskString += "Description:\t"  + description + "\n";
-		taskString += "Due Date:\t\t" + dueDateString + "\n";
+		taskString += "Priority:\t\t" + priority + System.lineSeparator();
+		taskString += "Description:\t"  + description + System.lineSeparator();
+		taskString += "Due Date:\t\t" + dueDateString + System.lineSeparator();
 		if(status.equals("Completed")) {
 			statusDateString = dateFormat.format(statusDate);
-			taskString += "Date Finished:\t" + statusDateString + "\n";
+			taskString += "Date Finished:\t" + statusDateString + System.lineSeparator();
 		}else if(status.equals("In Progress")) {
 			statusDateString = dateFormat.format(statusDate);
-			taskString += "Date Started:\t" + statusDateString + "\n";
+			taskString += "Date Started:\t" + statusDateString + System.lineSeparator();
 		}
-		taskString += "Status:\t\t\t" + status + "\n";
+		taskString += "Status:\t\t\t" + status + System.lineSeparator();
 		return taskString;
 	}
 	public String toString() {
@@ -218,7 +218,7 @@ public class Task {
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			String output = "";
 			for(Task task: taskList) {
-				output += task.toString() + "\n";
+				output += task.toString() + System.lineSeparator();
 			}
 			bufferedWriter.write(output);
 			bufferedWriter.close();
@@ -235,7 +235,7 @@ public class Task {
 			String output = "";
 			for(Task task: taskList) {
 				output += task.toPrintFormat();
-				output += "\n";
+				output += System.lineSeparator();
 			}
 			bufferedWriter.write(output);
 			bufferedWriter.close();
